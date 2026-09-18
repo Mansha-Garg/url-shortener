@@ -16,6 +16,11 @@ if command == "shorten":
         sys.exit()
 
     url = sys.argv[2]
+    alias = None
+
+    if len(sys.argv) >= 5 and sys.argv[3] == "--alias":
+        alias = sys.argv[4]
+    
     parsed = urlparse(url)
 
     if parsed.scheme not in ("http", "https") or not parsed.netloc:
@@ -30,15 +35,21 @@ if command == "shorten":
         print("URL already shortened.")
         print("Short code:", code)
         sys.exit()
+    if alias:
+        code = alias
+    else:
+        characters = string.ascii_letters + string.digits
+        code = ""
 
-    characters = string.ascii_letters + string.digits
-    code = ""
-
-    for i in range(6):
-        code = code + random.choice(characters)
+        for i in range(6):
+            code = code + random.choice(characters)
 
     with open("data.json", "r") as file:
         data = json.load(file)
+
+    if alias and alias in data:
+        print("Alias already exists.")
+        sys.exit()    
 
     data[code] = url
 
