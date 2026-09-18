@@ -1,0 +1,276 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Space Grotesk", sans-serif;
+    background: #f2efe8;
+    color: #171717;
+    min-height: 100vh;
+}
+
+.page {
+    min-height: 100vh;
+    padding: 28px 6vw 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* subtle background grid */
+
+.page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(23, 23, 23, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23, 23, 23, 0.045) 1px, transparent 1px);
+    background-size: 45px 45px;
+    pointer-events: none;
+}
+
+.nav {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.logo {
+    font-family: "DM Mono", monospace;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.status {
+    font-family: "DM Mono", monospace;
+    font-size: 12px;
+    color: #666;
+}
+
+.hero {
+    position: relative;
+    max-width: 1200px;
+    margin: 110px auto 0;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.eyebrow {
+    font-family: "DM Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+}
+
+h1 {
+    font-size: clamp(52px, 7vw, 92px);
+    line-height: 0.92;
+    letter-spacing: -4px;
+    max-width: 700px;
+}
+
+.intro {
+    margin-top: 28px;
+    max-width: 480px;
+    color: #62605b;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.visual {
+    height: 340px;
+    position: relative;
+}
+
+.route {
+    position: absolute;
+    width: 270px;
+    height: 270px;
+    border: 1px solid #171717;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.route::before {
+    content: "";
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    border: 1px solid #171717;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.route::after {
+    content: "→";
+    position: absolute;
+    font-family: "DM Mono", monospace;
+    font-size: 28px;
+    background: #f2efe8;
+    padding: 4px 12px;
+    right: -18px;
+    top: 42%;
+}
+
+.dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #171717;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form-section {
+    position: relative;
+    max-width: 1200px;
+    margin: 80px auto 0;
+}
+
+.form-label {
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+    color: #666;
+}
+
+.url-row {
+    display: flex;
+    border-bottom: 2px solid #171717;
+    align-items: center;
+}
+
+.url-row input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 18px 0;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 22px;
+    outline: none;
+}
+
+.url-row input::placeholder {
+    color: #aaa;
+}
+
+#shortenBtn {
+    border: none;
+    background: #171717;
+    color: #f2efe8;
+    padding: 15px 24px;
+    font-family: "DM Mono", monospace;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#shortenBtn:hover {
+    transform: translateX(4px);
+}
+
+.alias-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 22px;
+    align-items: center;
+}
+
+.alias-prefix {
+    font-family: "DM Mono", monospace;
+    color: #777;
+}
+
+#alias {
+    border: none;
+    border-bottom: 1px solid #aaa;
+    background: transparent;
+    padding: 8px 4px;
+    font-family: "DM Mono", monospace;
+    outline: none;
+}
+
+.result {
+    margin-top: 40px;
+    padding: 24px 0;
+    border-top: 1px solid #bbb;
+}
+
+.result-title {
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.short-link {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#shortUrl {
+    font-family: "DM Mono", monospace;
+    font-size: 18px;
+    flex: 1;
+    word-break: break-all;
+}
+
+#copyBtn {
+    background: transparent;
+    border: 1px solid #171717;
+    padding: 10px 16px;
+    font-family: "DM Mono", monospace;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 800px) {
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-top: 70px;
+    }
+
+    .visual {
+        height: 240px;
+    }
+
+    h1 {
+        letter-spacing: -2px;
+    }
+
+    .url-row {
+        flex-direction: column;
+        align-items: stretch;
+        border-bottom: none;
+    }
+
+    .url-row input {
+        border-bottom: 2px solid #171717;
+    }
+
+    #shortenBtn {
+        margin-top: 14px;
+    }
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="page">
+
+        <nav class="nav">
+            <div class="logo">/SHORTEN</div>
+            <div class="status">LOCAL ROUTING SYSTEM · 01</div>
+        </nav>
+
+        <section class="hero">
+
+            <div>
+                <p class="eyebrow">URL SHORTENER / 001</p>
+
+                <h1>
+                    Long links.<br>
+                    Short routes.
+                </h1>
+
+                <p class="intro">
+                    Turn oversized URLs into clean, shareable links.
+                    Create your own route or let the system generate one.
+                </p>
+            </div>
+
+            <div class="visual">
+                <div class="route">
+                    <div class="dot"></div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="form-section">
+
+            <p class="form-label">ENTER DESTINATION</p>
+
+            <div class="url-row">
+                <input
+                    type="url"
+                    id="url"
+                    placeholder="https://your-very-long-url.com/..."
+                >
+
+                <button id="shortenBtn">
+                    SHORTEN →
+                </button>
+            </div>
+
+            <div class="alias-row">
+                <span class="alias-prefix">custom route /</span>
+
+                <input
+                    type="text"
+                    id="alias"
+                    placeholder="optional"
+                >
+            </div>
+
+            <div id="result" class="result hidden">
+
+                <p class="result-title">YOUR SHORT ROUTE</p>
+
+                <div class="short-link">
+                    <a id="shortUrl" href="#" target="_blank"></a>
+
+                    <button id="copyBtn">
+                        COPY
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
