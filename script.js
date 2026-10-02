@@ -71,3 +71,55 @@ copyBtn.addEventListener("click", async function () {
     }, 1500);
 
 });
+async function loadRecentLinks() {
+    const recentLinks = document.getElementById("recentLinks");
+
+    try {
+        const response = await fetch("/links");
+        const links = await response.json();
+
+        if (links.length === 0) {
+            recentLinks.innerHTML =
+                '<p class="empty-state">No routes created yet.</p>';
+            return;
+        }
+
+        recentLinks.innerHTML = "";
+
+        links.forEach(function (link) {
+            const card = document.createElement("div");
+            card.className = "recent-card";
+
+            const shortUrl = window.location.origin + "/" + link.code;
+
+            card.innerHTML = `
+                <div>
+                    <div class="recent-code">/${link.code}</div>
+                    <div class="recent-url">${link.url}</div>
+                </div>
+
+                <button class="recent-copy">COPY</button>
+            `;
+
+            const copyButton = card.querySelector(".recent-copy");
+
+            copyButton.addEventListener("click", async function () {
+                await navigator.clipboard.writeText(shortUrl);
+
+                copyButton.textContent = "COPIED ✓";
+
+                setTimeout(function () {
+                    copyButton.textContent = "COPY";
+                }, 1500);
+            });
+
+            recentLinks.appendChild(card);
+        });
+
+    } catch (error) {
+        recentLinks.innerHTML =
+            '<p class="empty-state">Could not load recent routes.</p>';
+    }
+}
+
+loadRecentLinks();

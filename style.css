@@ -274,3 +274,87 @@ h1 {
         margin-top: 14px;
     }
 }
+/* Recent Routes */
+
+.recent-section {
+    margin-top: 80px;
+    padding-bottom: 40px;
+}
+
+.section-label {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    margin-bottom: 18px;
+    opacity: 0.55;
+}
+
+.recent-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.recent-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 20px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background: rgba(255, 255, 255, 0.55);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.recent-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0, 0, 0, 0.35);
+}
+
+.recent-code {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.recent-url {
+    font-size: 13px;
+    opacity: 0.55;
+    max-width: 560px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.recent-copy {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: transparent;
+    padding: 8px 12px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+}
+
+.recent-copy:hover {
+    background: #111;
+    color: #fff;
+}
+
+.empty-state {
+    font-size: 13px;
+    opacity: 0.5;
+}
+
+@media (max-width: 600px) {
+    .recent-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .recent-copy {
+        width: 100%;
+    }
+
+    .recent-url {
+        max-width: 100%;
+    }
+}

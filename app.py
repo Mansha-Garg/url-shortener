@@ -32,6 +32,18 @@ def generate_code():
             return code
 
 
+def get_url(entry):
+    if isinstance(entry, dict):
+        return entry.get("url", "")
+    return entry
+
+
+def get_clicks(entry):
+    if isinstance(entry, dict):
+        return entry.get("clicks", 0)
+    return 0
+
+
 @app.route("/")
 def home():
     return send_from_directory(".", "index.html")
@@ -50,7 +62,7 @@ def script():
 @app.route("/shorten", methods=["POST"])
 def shorten():
     data = load_data()
-    body = request.get_json()
+    body = request.get_json() or {}
 
     url = body.get("url", "").strip()
     alias = body.get("alias", "").strip()
@@ -67,21 +79,44 @@ def shorten():
     else:
         code = None
 
-        for saved_code, saved_url in data.items():
-            if saved_url == url:
+        for saved_code, saved_entry in data.items():
+            if get_url(saved_entry) == url:
                 code = saved_code
                 break
 
         if code is None:
             code = generate_code()
 
-    data[code] = url
+    data[code] = {
+        "url": url,
+        "clicks": get_clicks(data.get(code, {}))
+    }
+
     save_data(data)
 
     return jsonify({
         "code": code,
         "url": url
     })
+
+
+@app.route("/links")
+def get_links():
+    data = load_data()
+
+    recent = list(data.items())[-8:]
+    recent.reverse()
+
+    return jsonify([
+        {
+            "code": code,
+            "url": get_url(entry),
+            "clicks": get_clicks(entry)
+        }
+        for code, entry in recent
+    ])
+
+
 @app.route("/<code>")
 def redirect_url(code):
     data = load_data()
@@ -89,6 +124,23 @@ def redirect_url(code):
     if code not in data:
         return "Short URL not found.", 404
 
-    return redirect(data[code])
+    entry = data[code]
+
+    # Support both old and new data formats
+    if isinstance(entry, dict):
+        entry["clicks"] = entry.get("clicks", 0) + 1
+        destination = entry.get("url", "")
+    else:
+        destination = entry
+        data[code] = {
+            "url": destination,
+            "clicks": 1
+        }
+
+    save_data(data)
+
+    return redirect(destination)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
